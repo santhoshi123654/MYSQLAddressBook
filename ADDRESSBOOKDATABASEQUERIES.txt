@@ -1,0 +1,205 @@
+............UC1.............
+
+ create database AddressBookService;
+ Query OK, 1 row affected (0.02 sec)
+ 
+............UC2..............
+
+ create table Address_Book(firstName varchar(50) not null,lastName varchar(50) not null,address varchar(50) not null,city varchar(30) not null,state varchar(30) not null,zipcode int(10) not null,phonenumber varchar(30) not null,email nvarchar(320));
+Query OK, 0 rows affected, 2 warnings (0.05 sec)
+
+............UC3..............
+
+ insert into Address_Book values('SanthoshiRupa','Badam','PadmavathiColony','Mahabubnagar','Telangana',509001,'9876543210','santho123@gmail.com'),('Haridwar','Badam','KrishnaTempleRoad','Hyderabad','Telangana',509125,'8976543210','haridwar123@gmail.com'),('Kavya','maduri','MustafNagar','Khammam','Telangana',560098,'985643210','kavya@gmail.com');;
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+-----------+---------+-------------+-----------------------+
+| firstName     | lastName | address           | city         | state     | zipcode | phonenumber | email                 |
++---------------+----------+-------------------+--------------+-----------+---------+-------------+-----------------------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana |  509001 | 9876543210  | santho123@gmail.com   |
+| Haridwar      | Badam    | KrishnaTempleRoad | Hyderabad    | Telangana |  509125 | 8976543210  | haridwar123@gmail.com |
+| Kavya         | maduri   | MustafNagar       | Khammam      | Telangana |  560098 | 985643210   | kavya@gmail.com       |
++---------------+----------+-------------------+--------------+-----------+---------+-------------+-----------------------+
+3 rows in set (0.00 sec)
+
+
+............UC4..................
+
+ update address_book Set phonenumber='8765432167',state='AndhraPradesh' where firstname='kavya';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+---------------+---------+-------------+-----------------------+
+| firstName     | lastName | address           | city         | state         | zipcode | phonenumber | email                 |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+-----------------------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com   |
+| Haridwar      | Badam    | KrishnaTempleRoad | Hyderabad    | Telangana     |  509125 | 8976543210  | haridwar123@gmail.com |
+| Kavya         | maduri   | MustafNagar       | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com       |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+-----------------------+
+3 rows in set (0.00 sec)
+
+..............UC5.................
+
+
+mysql> delete from address_book where firstname ='haridwar';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from address_book;
++---------------+----------+------------------+--------------+---------------+---------+-------------+---------------------+
+| firstName     | lastName | address          | city         | state         | zipcode | phonenumber | email               |
++---------------+----------+------------------+--------------+---------------+---------+-------------+---------------------+
+| SanthoshiRupa | Badam    | PadmavathiColony | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com |
+| Kavya         | maduri   | MustafNagar      | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com     |
++---------------+----------+------------------+--------------+---------------+---------+-------------+---------------------+
+2 rows in set (0.00 sec)
+
+
+mysql> insert into Address_Book values('Sonu','maduri','saiakshayakiranam','Kurnool','Telangana',570987,'7654321890','sonu@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+
+| firstName     | lastName | address           | city         | state         | zipcode | phonenumber | email               |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com |
+| Kavya         | maduri   | MustafNagar       | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com     |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana     |  570987 | 7654321890  | sonu@gmail.com      |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+
+3 rows in set (0.00 sec)
+
+.....................UC6.....................
+
+
+mysql> select* from address_book where city='kurnool';
++-----------+----------+-------------------+---------+-----------+---------+-------------+----------------+
+| firstName | lastName | address           | city    | state     | zipcode | phonenumber | email          |
++-----------+----------+-------------------+---------+-----------+---------+-------------+----------------+
+| Sonu      | maduri   | saiakshayakiranam | Kurnool | Telangana |  570987 | 7654321890  | sonu@gmail.com |
++-----------+----------+-------------------+---------+-----------+---------+-------------+----------------+
+1 row in set (0.00 sec)
+
+mysql> select* from address_book where state='telangana';
++---------------+----------+-------------------+--------------+-----------+---------+-------------+---------------------+
+| firstName     | lastName | address           | city         | state     | zipcode | phonenumber | email               |
++---------------+----------+-------------------+--------------+-----------+---------+-------------+---------------------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana |  509001 | 9876543210  | santho123@gmail.com |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana |  570987 | 7654321890  | sonu@gmail.com      |
++---------------+----------+-------------------+--------------+-----------+---------+-------------+---------------------+
+2 rows in set (0.00 sec)
+
+..............................UC7...........................
+
+
+mysql> select city, count(*) from address_book where city='kurnool';
++---------+----------+
+| city    | count(*) |
++---------+----------+
+| Kurnool |        1 |
++---------+----------+
+1 row in set (0.00 sec)
+
+mysql> select state, count(*) from address_book where state='telangana';
++-----------+----------+
+| state     | count(*) |
++-----------+----------+
+| Telangana |        2 |
++-----------+----------+
+1 row in set (0.00 sec)
+
+...............................UC8...............................
+
+
+mysql> select* from address_book  where state='telangana' order by firstname;
++---------------+----------+-------------------+--------------+-----------+---------+-------------+---------------------+
+| firstName     | lastName | address           | city         | state     | zipcode | phonenumber | email               |
++---------------+----------+-------------------+--------------+-----------+---------+-------------+---------------------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana |  509001 | 9876543210  | santho123@gmail.com |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana |  570987 | 7654321890  | sonu@gmail.com      |
++---------------+----------+-------------------+--------------+-----------+---------+-------------+---------------------+
+2 rows in set (0.00 sec)
+
+................................UC9...........................
+
+ alter table  address_book add Type varchar(20) after email;
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+------+
+| firstName     | lastName | address           | city         | state         | zipcode | phonenumber | email               | Type |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com | NULL |
+| Kavya         | maduri   | MustafNagar       | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com     | NULL |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana     |  570987 | 7654321890  | sonu@gmail.com      | NULL |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+------+
+3 rows in set (0.00 sec)
+
+
+mysql> update address_book set type ='family' where firstname='santhoshirupa';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+--------+
+| firstName     | lastName | address           | city         | state         | zipcode | phonenumber | email               | Type   |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+--------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com | family |
+| Kavya         | maduri   | MustafNagar       | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com     | NULL   |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana     |  570987 | 7654321890  | sonu@gmail.com      | NULL   |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+--------+
+3 rows in set (0.00 sec)
+
+
+mysql> update address_book set type ='friend' where firstname='kavya';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+--------+
+| firstName     | lastName | address           | city         | state         | zipcode | phonenumber | email               | Type   |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+--------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com | family |
+| Kavya         | maduri   | MustafNagar       | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com     | friend |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana     |  570987 | 7654321890  | sonu@gmail.com      | NULL   |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+--------+
+3 rows in set (0.00 sec)
+
+
+mysql> update address_book set type ='profession' where firstname='sonu';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from address_book;
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+------------+
+| firstName     | lastName | address           | city         | state         | zipcode | phonenumber | email               | Type       |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+------------+
+| SanthoshiRupa | Badam    | PadmavathiColony  | Mahabubnagar | Telangana     |  509001 | 9876543210  | santho123@gmail.com | family     |
+| Kavya         | maduri   | MustafNagar       | Khammam      | AndhraPradesh |  560098 | 8765432167  | kavya@gmail.com     | friend     |
+| Sonu          | maduri   | saiakshayakiranam | Kurnool      | Telangana     |  570987 | 7654321890  | sonu@gmail.com      | profession |
++---------------+----------+-------------------+--------------+---------------+---------+-------------+---------------------+------------+
+3 rows in set (0.00 sec)
+
+..........................UC10..............................................
+
+
+mysql> select* from address_book where type='family';
++---------------+----------+------------------+--------------+-----------+---------+-------------+---------------------+--------+
+| firstName     | lastName | address          | city         | state     | zipcode | phonenumber | email               | Type   |
++---------------+----------+------------------+--------------+-----------+---------+-------------+---------------------+--------+
+| SanthoshiRupa | Badam    | PadmavathiColony | Mahabubnagar | Telangana |  509001 | 9876543210  | santho123@gmail.com | family |
++---------------+----------+------------------+--------------+-----------+---------+-------------+---------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select type,count(*) from address_book where type='family';
++--------+----------+
+| type   | count(*) |
++--------+----------+
+| family |        1 |
++--------+----------+
+1 row in set (0.00 sec)
+
